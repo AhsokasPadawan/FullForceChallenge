@@ -6,10 +6,23 @@ const {BASE_URL, COMMIT} = require('../../constants');
 
 
 function getCommits(req, res){
-        const data = axios.get(`https://api.github.com/repos/AhsokasPadawan/FullForceChallenge/tree/master/fullforcechallenge/git/commits/COMMIT_SHA`, {header :{username: `AhsokasPadawan` }, Accept: 'application/vnd.github.v3+json'});
+        const data = axios.get(`https://api.github.com/repos/AhsokasPadawan/FullForceChallenge/commits`, 
+        {header :{username: `AhsokasPadawan` }, Accept: 'application/vnd.github.v3+json'});
         data.then(response=>{
-            console.log(response.author, response.message)
-            res.json(response.author, response.message);
+            console.log('response', response.data[0].commit);
+            let arrayOfCommits = response.data.map(each=>{
+
+                return    {
+                    user : each.author.login,
+                    email : each.commit.author.email,
+                    date: each.commit.author.date,
+                    message : each.commit.message,
+                    sha : each.commit.tree.sha,
+                    url : each.commit.tree.url,
+                }
+            }
+            )
+            res.json(arrayOfCommits);
         })
         .catch(err => console.log(err));
         
