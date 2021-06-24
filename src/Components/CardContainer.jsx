@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Card from './Card'
 import Style from '../Styles/CardContainer.module.css';
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ function CardContainer(){
   
     //gettin the commits
     const commits = useSelector((state) => state.commits);
+    console.log('commits', commits);
     
     // Pagination
     const [initial, setInitial] = useState(0);
@@ -19,6 +20,7 @@ function CardContainer(){
     }
 
     let pages = [];
+    let someCommits= [];
     if(commits.length > 0){
         someCommits= commits.slice(initial, end);
         for(let i= 0; i < Math.ceil(commits.length/8); i++){
@@ -38,8 +40,9 @@ function CardContainer(){
 
 
     return(
-        <div className={Style.cardContainer}>
-        {someCommits.map((commit, index)=> <Card 
+        <div className={Style.container}>
+            <div className={Style.cardContainer}>
+            {someCommits.map((commit, index)=> <Card 
                                     sha={commit.sha}
                                     user={commit.user}
                                     email={commit.email}
@@ -48,7 +51,8 @@ function CardContainer(){
                                     url={commit.url}
                                     key={index}
                                     />)}
-        <div>{pages.map((each, index)=> <button value={each} key={index} onClick = {(e)=>handleClick(e.target.value)}>{each}</button>)}</div>
+            </div>
+            <div>{pages.map((each, index)=> <button className={Style.pageButton} value={each} key={index} onClick = {(e)=>handleClick(e.target.value)}>{each}</button>)}</div>
         </div>
     )
 }

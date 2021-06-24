@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap%27');
 .container{
     display: flex;
     justify-content: space-between;
@@ -20,10 +20,18 @@
     margin-right: 20px;
 }
 
-.link {
-    color: azure;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 25px;
-    text-decoration: none;
-    padding: 10px;
+.refreshBtn{
+    height: 50px;
+    width: 100px;
+    border: 2px solid coral;
+    border-radius: 5px;
+    color: black;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 18px;
+}
+
+.refreshBtn:hover{
+    border: 2px solid black;
+    color: black;
+    background-color: coral;
 }

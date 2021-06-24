@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { response } = require('express');
 const {BASE_URL, COMMIT} = require('../../constants');
 
 
@@ -9,13 +8,13 @@ function getCommits(req, res){
         const data = axios.get(`https://api.github.com/repos/AhsokasPadawan/FullForceChallenge/commits`, 
         {header :{username: `AhsokasPadawan` }, Accept: 'application/vnd.github.v3+json'});
         data.then(response=>{
-            console.log('response', response.data[0].commit);
             let arrayOfCommits = response.data.map(each=>{
 
+                let date = `${each.commit.author.date.split('T')[0]} ${each.commit.author.date.replace("Z", "").split('T')[1] }` ;
                 return    {
                     user : each.author.login,
                     email : each.commit.author.email,
-                    date: each.commit.author.date,
+                    date: date,
                     message : each.commit.message,
                     sha : each.commit.tree.sha,
                     url : each.commit.tree.url,
@@ -27,6 +26,7 @@ function getCommits(req, res){
         .catch(err => console.log(err));
         
 }
+
 
 function sayHi(req, res){
     res.send('You should probably stop and eat something')
