@@ -1,7 +1,11 @@
-const BASE_URL = "https://api.github.com/";
-const COMMIT = "";
+const BASE_URL = "https://api.github.com/repos";
+const COMMITS = "/commits";
+const USER = "/AhsokasPadawan";
+const REPO = "/FullForceChallenge"
 
 module.exports = {
     BASE_URL,
-    COMMIT
+    COMMITS, 
+    REPO,
+    USER
 }

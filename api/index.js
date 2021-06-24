@@ -18,6 +18,8 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+require('dotenv').config();
+
  
 server.listen(3001, () => {
   console.log('server listening at 3001');

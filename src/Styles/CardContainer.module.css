@@ -17,6 +17,7 @@
     border: 2px solid coral;
     border-radius: 5px;
     color: coral;
+    margin-left: 5px;
 }
 
 .pageButton:hover{

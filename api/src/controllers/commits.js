@@ -1,11 +1,10 @@
 const axios = require('axios');
-const {BASE_URL, COMMIT} = require('../../constants');
-
-
+const {BASE_URL, COMMITS, REPO, USER} = require('../../constants');
 
 
 function getCommits(req, res){
-        const data = axios.get(`https://api.github.com/repos/AhsokasPadawan/FullForceChallenge/commits`, 
+        // const data = axios.get(`https://api.github.com/repos/AhsokasPadawan/FullForceChallenge/commits`, 
+        const data = axios.get(`${BASE_URL}${USER}${REPO}${COMMITS}`, 
         {header :{username: `AhsokasPadawan` }, Accept: 'application/vnd.github.v3+json'});
         data.then(response=>{
             let arrayOfCommits = response.data.map(each=>{

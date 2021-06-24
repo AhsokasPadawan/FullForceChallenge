@@ -12,18 +12,18 @@ function CardContainer(){
     
     // Pagination
     const [initial, setInitial] = useState(0);
-    const [end, setEnd] = useState(8);
+    const [end, setEnd] = useState(6);
     
     function handleClick(each){
-        setInitial((parseInt(each) - 1)*8 );
-        setEnd(parseInt(each)*8)    
+        setInitial((parseInt(each) - 1)*6 );
+        setEnd(parseInt(each)*6)    
     }
 
     let pages = [];
     let someCommits= [];
     if(commits.length > 0){
         someCommits= commits.slice(initial, end);
-        for(let i= 0; i < Math.ceil(commits.length/8); i++){
+        for(let i= 0; i < Math.ceil(commits.length/6); i++){
             pages.push(i + 1);
         }
     }
