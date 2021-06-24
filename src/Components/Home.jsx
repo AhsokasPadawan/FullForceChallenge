@@ -1,19 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import Style from '../Styles/Home.module.css';
 import CardContainer from './CardContainer';
-import {getDogs, getTemperaments, getNames} from '../Actions/index';
+import {getCommits} from '../Actions/index';
+import { useDispatch } from "react-redux";
 
 
 
-function Home({getDogs, getTemperaments, getNames}){
+function Home(){
     
+    const dispatch = useDispatch();
+
     useEffect(
         ()=>{ 
-            getDogs()
-            getTemperaments()
-            getNames()
+            dispatch(getCommits())
         },[]
     )
 

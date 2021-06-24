@@ -2,20 +2,28 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Style from '../Styles/DogCard.module.css'; 
 
+/*
+ sha={commit.sha}
+                                    user={commit.user}
+                                    email={commit.email}
+                                    date={commit.date}
+                                    message={commit.message}
+                                    url={commit.url}
+*/
 
-
-function DogCard({name, temperament, image, id}){
+function DogCard({sha,user,email,date,message,url }){
 
     return(
-        <div className={Style.dogCard}>
+        <div className={Style.Card}>
+            <div className={Style.info}>
+            <h3 className ={Style.title}>User: {user}</h3>
+            <h3 className ={Style.title}>Email: {email}</h3>
+            <h3 className ={Style.title}>Date: {date}</h3>
+            <h3 className ={Style.title}>Message: {message}</h3>
+            <h3 className ={Style.title}>Url: <a href={url}>{url}</a></h3>
+            </div>
             <div className={Style.titleContainer}>
-            <Link to={`/home/${id}`} ><h3 className ={Style.title}>{name}</h3></Link>
-            </div>
-            <div className={Style.imgContainer}>
-                <img className={Style.dogImg} src={image || "https://img2.freepng.es/20180415/jdw/kisspng-logo-silhouette-dog-bone-dog-5ad41d4b59e7d5.7560651515238505713683.jpg"} alt="a dog"/>
-            </div>
-            <div className={Style.temperament}>
-                <p>{temperament}</p>
+            <Link to={`/home/${sha}`} >Get Details</Link>
             </div>
         </div>
     )

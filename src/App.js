@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Route exact path='/home' component={Home}></Route>
-      <Route path='/home/:id' render = {({match})=> <FullCard dogId={match.params.id} />}></Route>
+      <Route path='/home/:sha' render = {({match})=> <FullCard commitSha={match.params.sha} />}></Route>
     </div>
   );
 }

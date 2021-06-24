@@ -1,16 +1,17 @@
 import React, {useEffect}from 'react';
-import { getFullDogs } from '../Actions';
-import {connect} from 'react-redux';
-import Style from '../Styles/FullDog.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { getFullCard } from '../Actions/index';
+import Style from '../Styles/FullCard.module.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
 
-function FullDogCard({getFullDogs, fullDog, dogId}){
+function FullCard(){
 
-    
+    const commits = useSelector((state) => state.fullCommit);
+    const dispatch = useDispatch();
     useEffect(()=>{
-        getFullDogs(dogId);
+        dispatch(getFullDogs(dogId));
     }, [])
     
    
@@ -18,7 +19,7 @@ function FullDogCard({getFullDogs, fullDog, dogId}){
     return(
         <div>
             <NavBar />
-            <div className={Style.dogCard}>
+            <div className={Style.Card}>
                 <h3 className ={Style.title}>{fullDog.Name}</h3>
                 <img className={Style.dogImg} src={fullDog.Image || "https://img2.freepng.es/20180415/jdw/kisspng-logo-silhouette-dog-bone-dog-5ad41d4b59e7d5.7560651515238505713683.jpg"} alt="a dog"/>
                 <p>Temperaments: {fullDog.Temperament}</p>
@@ -31,19 +32,5 @@ function FullDogCard({getFullDogs, fullDog, dogId}){
     )
 }
 
-function mapStateToProps(state){
-    return{
-        fullDog : state.fullDog
-    }
-}
-
-function mapDispatchToProps(dispatch){
-    return{
-        getFullDogs : idDog=> dispatch(getFullDogs(idDog))
-    }
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(FullDogCard);
+export default FullCard;
 

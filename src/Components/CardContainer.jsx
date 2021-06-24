@@ -1,62 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import {connect} from 'react-redux';
 import Card from './Card'
 import Style from '../Styles/CardContainer.module.css';
+import { useSelector } from "react-redux";
 
 
-function CardContainer({dogs, dogsFiltered}){
+function CardContainer(){
   
+    //gettin the commits
+    const commits = useSelector((state) => state.commits);
+    
+    // Pagination
     const [initial, setInitial] = useState(0);
     const [end, setEnd] = useState(8);
     
     function handleClick(each){
-        console.log(each);
         setInitial((parseInt(each) - 1)*8 );
         setEnd(parseInt(each)*8)    
     }
 
-    let someDogs=[];
-    let bar = [];
-
-    if(dogsFiltered.length > 0){
-        someDogs= dogsFiltered.slice(initial, end);
-        for(let i= 0; i < Math.ceil(dogsFiltered.length/8); i++){
-            bar.push(i + 1);
-        }
-    }else{
-        someDogs= dogs.slice(initial, end);
-        for(let i= 0; i < Math.ceil(dogs.length/8); i++){
-            bar.push(i + 1);
+    let pages = [];
+    if(commits.length > 0){
+        someCommits= commits.slice(initial, end);
+        for(let i= 0; i < Math.ceil(commits.length/8); i++){
+            pages.push(i + 1);
         }
     }
 
     
 
-    if(someDogs.length < 1){
+    if(commits.length < 1){
         return(
             <div className={Style.cardContainer}>
-                <h1>There are not dogs of the searched breed </h1>
+                <h1>There are no commits for this proyect </h1>
             </div>
         )
     }
 
+
     return(
         <div className={Style.cardContainer}>
-        {someDogs.map((dog, index)=> <DogCard id={dog.Id}
-                                  name={dog.Name}
-                                  temperament={dog.Temperament}
-                                  image={dog.Image}
-                                  key={index}/>)}
-        <div>{bar.map((each, index)=> <button value={each} key={index} onClick = {(e)=>handleClick(e.target.value)}>{each}</button>)}</div>
+        {someCommits.map((commit, index)=> <Card 
+                                    sha={commit.sha}
+                                    user={commit.user}
+                                    email={commit.email}
+                                    date={commit.date}
+                                    message={commit.message}
+                                    url={commit.url}
+                                    key={index}
+                                    />)}
+        <div>{pages.map((each, index)=> <button value={each} key={index} onClick = {(e)=>handleClick(e.target.value)}>{each}</button>)}</div>
         </div>
     )
 }
 
-function mapStateToProps(state){
-    return{
-        dogs : state.dogs,
-        dogsFiltered : state.dogsFiltered
-    }
-}
-
-export default connect(mapStateToProps)(CardContainer);
+export default CardContainer;

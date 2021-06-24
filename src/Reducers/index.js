@@ -1,7 +1,7 @@
 
 const initialState = {
     commits : [],
-    fullcommit : {},
+    fullCommit : {},
 }
 
 
@@ -15,7 +15,7 @@ function rootReducer(state = initialState, action) {
     if (action.type === "GET_FULLCOMMIT"){
         return {
             ...state,
-            fullcommit: action.payload
+            fullCommit: action.payload
         }
     }
 
