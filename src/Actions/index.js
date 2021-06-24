@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // traigo todos los commits
 export function getCommits() {
+  console.log('Me estoy ejecutando');
     return function(dispatch) {
       return axios.get(`${BASE_URL}${COMMIT}`)
         .then(response => {
